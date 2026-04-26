@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات تصوير الأفراح</title>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; color: #d4af37; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .gallery img { width: 100%; border-radius: 8px; transition: 0.3s; cursor: pointer; }
+        .gallery img:hover { transform: scale(1.05); }
+        .services { margin-bottom: 20px; }
+        .service-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+        .price-display { font-size: 24px; text-align: center; margin: 20px 0; color: #27ae60; font-weight: bold; }
+        .contact-btns { display: flex; gap: 10px; justify-content: center; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .whatsapp { background-color: #25d366; }
+        .instagram { background-color: #e4405f; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-camera-retro"></i> استوديو التصوير الاحترافي</h1>
+    
+    <!-- قسم نماذج الصور -->
+    <div class="gallery">
+        <img src="https://placeholder.com" alt="نموذج 1">
+        <img src="https://placeholder.com" alt="نموذج 2">
+        <img src="https://placeholder.com" alt="نموذج 3">
+    </div>
+
+    <!-- قسم الخدمات -->
+    <div class="services">
+        <h2>اختر خدماتك</h2>
+        <div class="service-item">
+            <label><input type="checkbox" class="option" data-price="500"> تصوير فوتوغرافي (كاميرا واحدة)</label>
+            <span>500 ريال</span>
+        </div>
+        <div class="service-item">
+            <label><input type="checkbox" class="option" data-price="700"> تصوير فيديو</label>
+            <span>700 ريال</span>
+        </div>
+        <div class="service-item">
+            <label><input type="checkbox" class="option" data-price="300"> مونتاج احترافي</label>
+            <span>300 ريال</span>
+        </div>
+        <div class="service-item">
+            <label><input type="checkbox" class="option" data-price="400"> كاميرا ثانية (زاوية إضافية)</label>
+            <span>400 ريال</span>
+        </div>
+    </div>
+
+    <div class="price-display">السعر الإجمالي: <span id="total-price">0</span> ريال</div>
+
+    <!-- أزرار التواصل -->
+    <div class="contact-btns">
+        <a id="whatsapp-link" href="#" class="btn whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+        <a href="https://instagram.com" class="btn instagram"><i class="fab fa-instagram"></i> إنستقرام</a>
+    </div>
+</div>
+
+<script>
+    const options = document.querySelectorAll('.option');
+    const totalDisplay = document.getElementById('total-price');
+    const whatsappLink = document.getElementById('whatsapp-link');
+    const myPhone = "9665XXXXXXXX"; // ضع رقمك هنا بالصيغة الدولية
+
+    function calculateTotal() {
+        let total = 0;
+        let selectedServices = [];
+        options.forEach(opt => {
+            if (opt.checked) {
+                total += parseInt(opt.getAttribute('data-price'));
+                selectedServices.push(opt.parentElement.textContent.trim());
+            }
+        });
+        totalDisplay.innerText = total;
+
+        // تجهيز رابط الواتساب
+        let message = `مرحباً، أريد طلب خدمة تصوير: %0A` + selectedServices.join('%0A') + `%0Aالإجمالي: ${total} ريال`;
+        whatsappLink.href = `https://wa.me{myPhone}?text=${message}`;
+    }
+
+    options.forEach(opt => opt.addEventListener('change', calculateTotal));
+</script>
+
+</body>
+</html>
